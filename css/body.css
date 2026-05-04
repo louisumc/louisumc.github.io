@@ -1,0 +1,17 @@
+body {
+	font-family: Arial;
+	font-size: 14px;
+	text-decoration: none;
+	background-image: url(../images/background.gif);
+	background-color: #D4D4D4;
+	background-repeat: repeat-x;
+	margin: 0px;
+	padding: 0px;
+}
+.menufloat 
+{
+	left: 840px;
+	height: 430px;
+	width: 138px;
+	position:absolute;
+}
