@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Paulo Nakakoge - Portfólio</title>
+
+<link href="css/body.css" rel="stylesheet" />
+<link href="css/contents.css" rel="stylesheet" />
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    
+}
+
+/* CENTRALIZA */
+#app {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* WRAPPER */
+#main-wrapper {
+    display: flex;
+    width: 900px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+/* CONTEÚDO */
+#content-wrapper {
+    width: 700px;
+    background: #ccc url(images/background_content.gif) no-repeat;
+    padding: 40px 20px;
+    min-height: 600px;
+    box-sizing: border-box;
+}
+
+/* EVITA PULO */
+#conteudo_site {
+    min-height: 400px;
+}
+
+/* MENU */
+#menufloat {
+    display: flex;
+    margin-left: 10px;
+    position: relative;
+    align-items: center;              /* centraliza verticalmente os itens */
+    margin-top: 120px;                /* sobe o menu (ajuste fino aqui) */
+}
+
+/* BORDA BRANCA */
+.menu-outer {
+    background: #fff;
+    padding: 5px;
+    height: fit-content;
+}
+
+/* CAIXA INTERNA */
+.menu-box {
+    width: 124px;
+    background: #d0d0d0;
+}
+
+/* SCROLL AREA */
+#menufloat_content {
+    height: 372px;
+    overflow: hidden;
+}
+
+/* BOTÕES CENTRALIZADOS */
+.scroll-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;          /* centraliza vertical */
+    height: 372px;                    /* mesma altura do menu */
+    margin-left: 4px;
+}
+
+
+/* BOTÕES */
+.scroll-btn {
+    width: 20px;
+    height: 49px;
+    border: none;
+    background: linear-gradient(to bottom, #bfbfbf, #8c8c8c);
+    color: white;
+    cursor: pointer;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+
+    /* efeitos */
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5),
+                0 1px 2px rgba(0,0,0,0.3);
+    transition: all 0.15s ease;
+}
+
+/* HOVER */
+.scroll-btn:hover {
+    background: linear-gradient(to bottom, #a6a6a6, #737373);
+}
+
+/* CLICK */
+.scroll-btn:active {
+    background: linear-gradient(to bottom, #737373, #4d4d4d);
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.5);
+    transform: translateY(1px);
+}
+
+/* THUMBS */
+#menufloat_content img {
+    display: block;
+    margin: 3px auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#menufloat_content img:hover {
+    transform: scale(1.05);
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    top: 25px;
+    left: -50px;
+}
+
+/* FADE */
+.fade {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.fade.show {
+    opacity: 1;
+}
+</style>
+
+<script>
+var aNames = [
+    "Deloitte",
+    "SKY Brasil",
+    "DIRECTV",
+    "Nestlé",
+    "Nextel",
+    "Buzzing",
+    "Cyrela",
+    "De l´Amour",
+    "Interfusão",
+    "Jogo",
+    "Kachani",
+    "Klabin",
+    "Larissa Aleksandrov",
+    "Marcelo Rosset",
+    "Miniflog",
+    "Plan Apply",
+    "Side Walk",
+    "Terra Avallone",
+    "The First"
+];
+
+var aThumbs = [
+    "thumb_job_deloitte.gif",
+    "thumb_job_skybrasil.gif",
+    "thumb_job_directv.gif",
+    "thumb_job_nestle.gif",
+    "thumb_job_nextel.gif",
+    "thumb_job_buzzing.gif",
+    "thumb_job_cyrela.gif",
+    "thumb_job_delamour.gif",
+    "thumb_job_interfusao.gif",
+    "print_job_nestle_jogo.gif",
+    "thumb_job_kachani.gif",
+    "thumb_job_klabin.gif",
+    "thumb_job_aleksandrov.gif",
+    "thumb_job_rosset.gif",
+    "thumb_job_miniflog.gif",
+    "thumb_job_planapply.gif",
+    "thumb_job_sidewalk.gif",
+    "thumb_job_avallone.gif",
+    "thumb_job_thefirst.gif"
+];
+
+var aLinks = [
+    "job_deloitte.html",
+    "job_skybrasil.html",
+    "job_directv.html",
+    "job_nestle.html",
+    "job_nextel.html",
+    "job_buzzing.html",
+    "job_cyrela.html",
+    "job_delamour.html",
+    "job_interfusao.html",
+    "job_nestle_jogos.html",
+    "job_kachani.html",
+    "job_klabin.html",
+    "job_aleksandrov.html",
+    "job_rosset.html",
+    "job_miniflog.html",
+    "job_planapply.html",
+    "job_sidewalk.html",
+    "job_avallone.html",
+    "job_thefirst.html"
+];
+function menufloat() {
+    const container = document.getElementById('menufloat_content');
+
+    let html = "";
+
+    for (let i = 0; i < aThumbs.length; i++) {
+        html += `
+            <a href="#" data-link="${aLinks[i]}">
+                <img src="images/${aThumbs[i]}" alt="${aNames[i]}">
+            </a>
+        `;
+    }
+
+    container.innerHTML = html;
+
+    container.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            openContent(this.dataset.link);
+        });
+    });
+
+    container.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        container.scrollTop += e.deltaY;
+    });
+
+    openContent('curriculo.html');
+}
+
+function openContent(html) {
+    window.scrollTo(0, 0);
+
+    const el = document.getElementById('conteudo_site');
+
+    el.classList.remove('show');
+    el.style.minHeight = el.offsetHeight + "px";
+
+    el.innerHTML = "<center>loading<br><img src='images/loading.gif'></center>";
+
+    fetch(html)
+        .then(res => res.text())
+        .then(data => {
+            setTimeout(() => {
+                el.innerHTML = data;
+                el.classList.add('fade', 'show');
+                el.style.minHeight = "400px";
+            }, 100);
+        })
+        .catch(() => {
+            el.innerHTML = "<p>Erro ao carregar conteúdo</p>";
+            el.style.minHeight = "400px";
+        });
+}
+
+let scrollInterval = null;
+
+function startScroll(direction) {
+    const el = document.getElementById('menufloat_content');
+    const speed = direction === 'up' ? -5 : 5;
+
+    stopScroll();
+
+    scrollInterval = setInterval(() => {
+        el.scrollTop += speed;
+    }, 10);
+}
+
+function stopScroll() {
+    clearInterval(scrollInterval);
+}
+
+window.onload = function() {
+    document.getElementById('scrollUp').onmousedown = () => startScroll('up');
+    document.getElementById('scrollDown').onmousedown = () => startScroll('down');
+    document.onmouseup = stopScroll;
+    menufloat();
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="app">
+    <div id="main-wrapper">
+
+        <!-- CONTEÚDO -->
+        <div id="content-wrapper">
+            <div id="conteudo_site" class="fade show"></div>
+        </div>
+
+        <!-- MENU -->
+        <div id="menufloat">
+
+            <div class="menu-outer">
+                <div class="menu-box">
+                    <div id="menufloat_content"></div>
+                </div>
+            </div>
+
+            <div class="scroll-controls">
+                <button id="scrollUp" class="scroll-btn">▲</button>
+                <button id="scrollDown" class="scroll-btn">▼</button>
+            </div>
+
+            <div class="logo">
+                <a href="#" onclick="openContent('curriculo.html'); return false;">
+                    <img src="images/logotipo.gif">
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
