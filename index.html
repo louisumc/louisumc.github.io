@@ -281,9 +281,27 @@ function stopScroll() {
 }
 
 window.onload = function() {
-    document.getElementById('scrollUp').onmousedown = () => startScroll('up');
-    document.getElementById('scrollDown').onmousedown = () => startScroll('down');
+    const upBtn = document.getElementById('scrollUp');
+    const downBtn = document.getElementById('scrollDown');
+
+    // DESKTOP
+    upBtn.onmousedown = () => startScroll('up');
+    downBtn.onmousedown = () => startScroll('down');
     document.onmouseup = stopScroll;
+
+    // MOBILE (TOUCH)
+    upBtn.ontouchstart = (e) => {
+        e.preventDefault();
+        startScroll('up');
+    };
+
+    downBtn.ontouchstart = (e) => {
+        e.preventDefault();
+        startScroll('down');
+    };
+
+    document.ontouchend = stopScroll;
+
     menufloat();
 };
 </script>
